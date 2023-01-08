@@ -30,7 +30,7 @@ public class DataService {
         }
 
         for (String s : origin) {
-            ListItem textItem = new ListItem(s, idWorker.nextId() + "", "/imgs/" + random.nextInt(BaseProp.COUNT_IMGS) + ".png", random.nextInt(BaseProp.MAX_LIST_ITEMS_VIEW), random.nextInt(BaseProp.MAX_LIST_ITEMS_COMMENT));
+            ListItem textItem = new ListItem(s, idWorker.nextId() + "", "/static/imgs/" + random.nextInt(BaseProp.COUNT_IMGS) + ".png", random.nextInt(BaseProp.MAX_LIST_ITEMS_VIEW), random.nextInt(BaseProp.MAX_LIST_ITEMS_COMMENT));
             listItems.add(textItem);
         }
 

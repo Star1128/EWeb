@@ -69,7 +69,9 @@ ip:8211
 
 ## API
 
-### 获取文本数据
+### 请求文本
+
+#### 不带参数
 
 方法：GET
 
@@ -86,7 +88,7 @@ ip:8211
 ```json
 {
     "success": true,
-    "code": 10000,
+    "code": 200,
     "message": "获取成功",
     "data": [
         {
@@ -112,19 +114,7 @@ ip:8211
 }
 ```
 
-### 获取图片内容
-
-直接使用上面的图片路径访问即可
-
-方法：GET
-
-```shell
-/imgs/xx.png
-```
-
-xx范围：0~16
-
-### get带参数请求
+#### 带参数
 
 方法：GET
 
@@ -144,7 +134,7 @@ xx范围：0~16
 ```json
 {
   "success": true,
-  "code": 10000,
+  "code": 200,
   "msg": "GET带参数请求成功",
   "data": [
     {
@@ -181,13 +171,87 @@ xx范围：0~16
 ```json
 {
   "success":false,
-  "code":11111,
+  "code":400,
   "msg":"order参数非法",
   "data":null
 }
 ```
 
-### 单文件上传
+### 请求图片
+
+方法：GET
+
+接口：
+
+```shell
+/imgs/xx.png
+```
+
+xx范围：0~?
+
+### 提交文本
+
+#### Query参数
+
+方法：POST
+
+接口：
+
+```shell
+/post/query
+```
+
+参数：
+
+content 字符内容
+
+```shell
+ localhost:8211/post/query?content=EWeb很好用
+```
+
+返回：
+
+```json
+{
+	"success": true,
+	"code": 200,
+	"msg": "提交文本成功：EWeb很好用",
+	"data": null
+}
+```
+
+#### Body参数
+
+方法：POST
+
+接口：
+
+```shell
+/post/body
+```
+
+参数：
+
+articleId 文章id
+
+commentContent 评论内容
+
+<img src="https://typora-1310202894.cos.ap-beijing.myqcloud.com/images/image-20230108174454380.png" alt="image-20230108174454380" style="zoom:50%;" /> 
+
+返回：
+
+```json
+{
+	"success": true,
+	"code": 10000,
+	"msg": "提交文本成功：EWeb很好用",
+	"data": null
+}
+```
+
+### 文件上传
+
+#### 单文件上传
 
 方法：post
 
@@ -212,7 +276,7 @@ xx范围：0~16
 }
 ```
 
-### 多文件上传
+#### 多文件上传
 
 方法：post
 
@@ -239,7 +303,7 @@ xx范围：0~16
 
 
 
-### 上传文件携带参数
+#### 上传文件携带参数
 
 方法：post
 
@@ -261,77 +325,6 @@ isFree是否免费“true/false” 字符串类型
 {success=true, code=10000, message='上传成功.文件路径为：E:\codes\Idear\SobNetworkCourseServer\target\classes\sobUpload\rBsADV3nxtKACoSfAAAPx8jyjF8169.png', data=your descriptions is --> "我是文件的描述内容..." isFree == > "false"}
 ```
 
-### 提交评论
-
-方法：post
-
-接口
-
-```shell
-/post/comment
-```
-
-body json 字段
-
-articleId:文章id
-
-commentContent:评论内容
-
-eg：
-
-```json
-{
-	"articleId":"234123",
-	"commentContent":"这是评论内容"
-}
-```
-
-返回：
-
-```json
-{
-    "success": true,
-    "code": 10000,
-    "message": "评论成功:这是评论内容",
-    "data": null
-}
-```
-
-
-
-
-
-### 提交字符串
-
-方法：post
-
-接口
-
-```shell
-/post/string
-```
-
-参数：
-
-string 字符内容
-
-```shell
- localhost:9102/post/string?string=内容测试内容
-```
-
-返回：
-
-```json
-{
-    "success": true,
-    "code": 10000,
-    "message": "提交字符串成功:内容测试内容",
-    "data": null
-}
-```
-
-
-
 ### 文件下载
 
 方法：get
@@ -348,15 +341,11 @@ fileName的取值为：[0,16]
 
 文件流
 
+### 登录
 
+方法：POST
 
-### 登录接口
-
-方法：post
-
-接口
-
-
+接口：
 
 ```shell
 /login
@@ -366,18 +355,20 @@ fileName的取值为：[0,16]
 
 userName 用户名
 
-参数
-
 password 密码
 
-返回结果：
+<img src="https://typora-1310202894.cos.ap-beijing.myqcloud.com/images/image-20230108174257061.png" alt="image-20230108174257061" style="zoom:50%;"  /> 
+
+返回：
+
+data 用户Token
 
 ```json
 {
-    "success": true,
-    "code": 10000,
-    "message": "这是你提交上来的数据：拉大锯 - 12938471902387",
-    "data": "2a142e7c-754e-413d-a662-77c27abc097c"
+	"success": true,
+	"code": 10000,
+	"msg": "登录成功：Ethan",
+	"data": "94a932b1-1b7d-4959-8767-2343886b0ee5"
 }
 ```
 
