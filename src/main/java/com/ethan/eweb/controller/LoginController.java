@@ -20,9 +20,21 @@ public class LoginController {
 
     @PostMapping
     public ResponseResult doLogin(@RequestParam("userName") String userName, @RequestParam("password") String password) {
-        ResponseResult result = new ResponseResult(CommonState.SUCCESS);
-        result.setMsg("登录成功：" + userName);
-        result.setData(UUID.randomUUID().toString());
-        return result;
+        if (userName != null && userName.length() != 0) {
+            ResponseResult result;
+            if (password != null && password.length() != 0) {
+                result = new ResponseResult(CommonState.SUCCESS);
+                result.setMsg("登录成功：" + userName);
+                result.setData(UUID.randomUUID().toString());
+            } else {
+                result = new ResponseResult(CommonState.LOGIN_FAILED);
+                result.setMsg("密码不能为空");
+            }
+            return result;
+        } else {
+            ResponseResult result = new ResponseResult(CommonState.LOGIN_FAILED);
+            result.setMsg("用户名不能为空");
+            return result;
+        }
     }
 }
