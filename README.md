@@ -90,7 +90,7 @@ ip:8211
 ```json
 {
     "success": true,
-    "code": 200,
+    "code": 10000,
     "message": "获取成功",
     "data": [
         {
@@ -136,7 +136,7 @@ ip:8211
 ```json
 {
   "success": true,
-  "code": 200,
+  "code": 10000,
   "msg": "GET带参数请求成功",
   "data": [
     {
@@ -173,7 +173,7 @@ ip:8211
 ```json
 {
   "success":false,
-  "code":400,
+  "code":11111,
   "msg":"order参数非法",
   "data":null
 }
@@ -216,7 +216,7 @@ content 字符内容
 ```json
 {
 	"success": true,
-	"code": 200,
+	"code": 10000,
 	"msg": "提交文本成功：EWeb很好用",
 	"data": null
 }
