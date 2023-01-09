@@ -7,6 +7,8 @@ public enum CommonState implements IResponseState {
     REGISTER_SUCCESS(true, 10002, "注册成功"),
     LOGIN_SUCCESS(true, 10003, "登录成功"),
     UPLOAD_SUCCESS(true, 10004, "上传成功"),
+    DOWNLOAD_SUCCESS(true, 10005, "下载成功"),
+
     FAIL(false, 11111, "操作失败"),
     LOGIN_FAILED(false, 11112, "账号或密码错误"),
     PHONE_NUMBER_ERROR(false, 11113, "手机号码错误"),
@@ -18,8 +20,9 @@ public enum CommonState implements IResponseState {
     PHONE_NUMBER_NULL(false, 11119, "手机号码为空"),
     USER_NOT_REGISTER(false, 11120, "该手机号码未注册"),
     ACCOUNT_NOT_LOGIN(false, 11121, "账号未登录"),
-    UPLOAD_FAILED(false,11122,"上传失败"),
-    LOCAL_CREATE_FAILED(false,11123,"创建文件失败");
+    UPLOAD_FAILED(false, 11122, "上传失败"),
+    LOCAL_CREATE_FAILED(false, 11123, "创建文件失败"),
+    DOWNLOAD_FAILED(false, 11124, "下载失败");
 
     private final boolean success;
     private final int code;

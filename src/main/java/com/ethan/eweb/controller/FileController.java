@@ -30,6 +30,15 @@ import java.util.Enumeration;
 @RequestMapping("/file")
 public class FileController {
 
+    private static void printHeader(HttpServletRequest request) {
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = headerNames.nextElement();
+            String value = request.getHeader(key);
+            System.out.println(key + "  ==> " + value);
+        }
+    }
+
     @PostMapping({"/upload/single"})
     public ResponseResult uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
         printHeader(request);
@@ -71,49 +80,37 @@ public class FileController {
     }
 
     @GetMapping({"/download/{fileName}"})
-    public String download(@PathVariable("fileName") String fileName, HttpServletResponse response) throws IOException {
+    public ResponseResult download(@PathVariable("fileName") String fileName, HttpServletResponse response) throws IOException {
         try {
             int i = Integer.parseInt(fileName);
             if (i < 0 || i > 16) {
-                return null;
+                return new ResponseResult(CommonState.DOWNLOAD_FAILED);
             }
-        } catch (Exception var16) {
-            var16.printStackTrace();
-            return null;
+        } catch (Exception exn) {
+            exn.printStackTrace();
+            return new ResponseResult(CommonState.DOWNLOAD_FAILED);
         }
 
-        BufferedOutputStream bos = null;
         fileName = fileName + ".png";
         ClassPathResource resource = new ClassPathResource("static/imgs/" + fileName);
         long length = resource.contentLength();
-        System.out.println("content length -- > " + length);
+        System.out.println("Content Length ==> " + length);
         response.setContentType("application/x-msdownload;");
         response.addHeader("Content-disposition", "attachment; filename=" + new String(fileName.getBytes(StandardCharsets.UTF_8), "ISO8859-1"));
         response.addHeader("Content-Length", String.valueOf(length));
 
-        Object var8;
-        try {
-            bos = new BufferedOutputStream(response.getOutputStream());
-            InputStream inputStream = resource.getInputStream();
+        try (BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream())) {
+            InputStream is = resource.getInputStream();
             byte[] buf = new byte[1024];
-
             int len;
-            while ((len = inputStream.read(buf, 0, buf.length)) != -1) {
+            while ((len = is.read(buf)) != -1) {
                 bos.write(buf, 0, len);
             }
-
-            return null;
-        } catch (Exception var14) {
-            var14.printStackTrace();
-            var8 = null;
-        } finally {
-            if (bos != null) {
-                bos.close();
-            }
-
+            return new ResponseResult(CommonState.DOWNLOAD_SUCCESS);
+        } catch (Exception exn) {
+            exn.printStackTrace();
+            return new ResponseResult(CommonState.DOWNLOAD_FAILED);
         }
-
-        return (String) var8;
     }
 
     private ResponseResult saveFile(MultipartFile file) {
@@ -136,15 +133,6 @@ public class FileController {
                 exn.printStackTrace();
                 return new ResponseResult(CommonState.UPLOAD_FAILED);
             }
-        }
-    }
-
-    private static void printHeader(HttpServletRequest request) {
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String key = headerNames.nextElement();
-            String value = request.getHeader(key);
-            System.out.println(key + "  ==> " + value);
         }
     }
 }
