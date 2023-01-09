@@ -17,8 +17,9 @@ public enum CommonState implements IResponseState {
     MSG_CODE_ERROR(false, 11118, "验证码错误"),
     PHONE_NUMBER_NULL(false, 11119, "手机号码为空"),
     USER_NOT_REGISTER(false, 11120, "该手机号码未注册"),
-    USER_NAME_ERROR_OR_PASSWORD_ERROR(false, 11121, "用户名或密码错误"),
-    ACCOUNT_NOT_LOGIN(false, 11122, "账号未登录");
+    ACCOUNT_NOT_LOGIN(false, 11121, "账号未登录"),
+    UPLOAD_FAILED(false,11122,"上传失败"),
+    LOCAL_CREATE_FAILED(false,11123,"创建文件失败");
 
     private final boolean success;
     private final int code;

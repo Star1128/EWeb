@@ -23,7 +23,7 @@ public class LoginController {
         if (userName != null && userName.length() != 0) {
             ResponseResult result;
             if (password != null && password.length() != 0) {
-                result = new ResponseResult(CommonState.SUCCESS);
+                result = new ResponseResult(CommonState.LOGIN_SUCCESS);
                 result.setMsg("登录成功：" + userName);
                 result.setData(UUID.randomUUID().toString());
             } else {

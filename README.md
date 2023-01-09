@@ -253,86 +253,95 @@ commentContent 评论内容
 
 #### 单文件上传
 
-方法：post
+方法：POST
 
 接口：
 
 ```shell
-/file/upload
+/file/upload/single
 ```
 
-参数：
+参数（Body 内 form-data）：
 
-文件 file
+file 要上传的文件
+
+<img src="https://typora-1310202894.cos.ap-beijing.myqcloud.com/images/image-20230109113842393.png" alt="image-20230109113842393" style="zoom:50%;" /> 
 
 返回：
 
 ```json
 {
-    "success": true,
-    "code": 10000,
-    "message": "上传成功.文件路径为：E:\\codes\\Idear\\SobNetworkCourseServer\\target\\classes\\sobUpload\\0.png",
-    "data": null
+	"success": true,
+	"code": 10000,
+	"msg": "上传成功，路径为：upload/微信图片_20220517085109.jpg",
+	"data": null
 }
 ```
 
 #### 多文件上传
 
-方法：post
+方法：POST
 
 接口：
 
 ```shell
-/files/upload
+/file/upload/multiple
 ```
 
-参数：
+参数（Body 内 form-data）：
 
-文件列表 files
+files 要上传的文件们
+
+<img src="https://typora-1310202894.cos.ap-beijing.myqcloud.com/images/image-20230109165932027.png" alt="image-20230109165932027" style="zoom:50%;" /> 
 
 返回：
 
 ```json
 {
-    "success": true,
-    "code": 10000,
-    "message": "上传成功3个文件，路径：E:/codes/Idear/SobNetworkCourseServer/target/classes/sobUpload",
-    "data": null
+	"success": true,
+	"code": 10004,
+	"msg": "上传成功2个文件，路径为：upload/微信图片_20220517085109.jpg upload/...",
+	"data": null
 }
 ```
 
-
-
 #### 上传文件携带参数
 
-方法：post
+方法：POST
 
 接口：
 
 ```
-/file/params/upload
+/file/upload/param
 ```
 
-参数file，文件类型
+参数（Body 内 form-data）：
 
-description 描述 字符串类型
+file 要上传的文件
 
-isFree是否免费“true/false” 字符串类型
+description 描述
+
+<img src="https://typora-1310202894.cos.ap-beijing.myqcloud.com/images/image-20230109171333524.png" alt="image-20230109171333524" style="zoom:50%;" /> 
 
 返回：
 
 ```json
-{success=true, code=10000, message='上传成功.文件路径为：E:\codes\Idear\SobNetworkCourseServer\target\classes\sobUpload\rBsADV3nxtKACoSfAAAPx8jyjF8169.png', data=your descriptions is --> "我是文件的描述内容..." isFree == > "false"}
+{
+	"success": true,
+	"code": 10004,
+	"msg": "成功上传，路径为：upload/微信图片_20220517085109.jpg",
+	"data": "文件描述为：EWeb真好用"
+}
 ```
 
 ### 文件下载
 
-方法：get
+方法：GET
 
 接口：
 
 ```shell
-/download/{fileName}
+/file/download/{fileName}
 ```
 
 fileName的取值为：[0,16]
