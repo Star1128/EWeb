@@ -14,6 +14,8 @@ java -jar EWeb.jar
 
 看到这个界面，说明启动成功
 
+![image-20230109181901020](https://typora-1310202894.cos.ap-beijing.myqcloud.com/images/image-20230109181901020.png)
+
 ## 功能
 
 - 文本请求 GET/POST

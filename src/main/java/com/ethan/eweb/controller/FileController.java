@@ -83,7 +83,7 @@ public class FileController {
     public ResponseResult download(@PathVariable("fileName") String fileName, HttpServletResponse response) throws IOException {
         try {
             int i = Integer.parseInt(fileName);
-            if (i < 0 || i > 16) {
+            if (i < 1 || i > BaseProp.COUNT_IMGS) {
                 return new ResponseResult(CommonState.DOWNLOAD_FAILED);
             }
         } catch (Exception exn) {
