@@ -1,6 +1,6 @@
 package com.ethan.eweb.controller;
 
-import com.ethan.eweb.prop.BaseProp;
+import com.ethan.eweb.config.BaseConfig;
 import com.ethan.eweb.response.CommonState;
 import com.ethan.eweb.response.ResponseResult;
 import org.springframework.core.io.ClassPathResource;
@@ -57,7 +57,7 @@ public class FileController {
                 ResponseResult result = new ResponseResult(CommonState.UPLOAD_SUCCESS);
                 StringBuilder builder = new StringBuilder();
                 for (MultipartFile file : files) {
-                    builder.append(BaseProp.UPLOAD_PATH).append(file.getOriginalFilename()).append(" ");
+                    builder.append(BaseConfig.UPLOAD_PATH).append(file.getOriginalFilename()).append(" ");
                 }
                 result.setMsg("成功上传" + files.length + "个文件，路径为：" + builder);
                 return result;
@@ -83,7 +83,7 @@ public class FileController {
     public ResponseResult download(@PathVariable("fileName") String fileName, HttpServletResponse response) throws IOException {
         try {
             int i = Integer.parseInt(fileName);
-            if (i < 1 || i > BaseProp.COUNT_IMGS) {
+            if (i < 1 || i > BaseConfig.COUNT_IMGS) {
                 return new ResponseResult(CommonState.DOWNLOAD_FAILED);
             }
         } catch (Exception exn) {
@@ -118,7 +118,7 @@ public class FileController {
             return new ResponseResult(CommonState.UPLOAD_FAILED);
         } else {
             String fileName = file.getOriginalFilename();
-            File dest = new File(BaseProp.UPLOAD_PATH + fileName);
+            File dest = new File(BaseConfig.UPLOAD_PATH + fileName);
             if (!dest.getParentFile().exists()) {
                 boolean mkdir = dest.getParentFile().mkdirs();
             }

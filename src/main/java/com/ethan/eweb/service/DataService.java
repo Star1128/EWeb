@@ -2,7 +2,7 @@ package com.ethan.eweb.service;
 
 import com.ethan.eweb.data.DataHolder;
 import com.ethan.eweb.pojo.ListItem;
-import com.ethan.eweb.prop.BaseProp;
+import com.ethan.eweb.config.BaseConfig;
 import com.ethan.eweb.worker.IdWorker;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class DataService {
         }
 
         for (String s : origin) {
-            ListItem textItem = new ListItem(s, idWorker.nextId() + "", "/static/imgs/" + random.nextInt(BaseProp.COUNT_IMGS) + ".png", random.nextInt(BaseProp.MAX_LIST_ITEMS_VIEW), random.nextInt(BaseProp.MAX_LIST_ITEMS_COMMENT));
+            ListItem textItem = new ListItem(s, idWorker.nextId() + "", "/static/imgs/" + random.nextInt(BaseConfig.COUNT_IMGS) + ".png", random.nextInt(BaseConfig.MAX_LIST_ITEMS_VIEW), random.nextInt(BaseConfig.MAX_LIST_ITEMS_COMMENT));
             listItems.add(textItem);
         }
 

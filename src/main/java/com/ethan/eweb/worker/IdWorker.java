@@ -1,5 +1,7 @@
 package com.ethan.eweb.worker;
 
+import com.ethan.eweb.config.BaseConfig;
+
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -68,7 +70,7 @@ public class IdWorker {
         long id = 0L;
 
         try {
-            InetAddress ip = InetAddress.getByName("192.168.1.103");
+            InetAddress ip = InetAddress.getByName(BaseConfig.HOST);
             NetworkInterface network = NetworkInterface.getByInetAddress(ip);
             if (network == null) {
                 id = 1L;
